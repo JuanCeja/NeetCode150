@@ -24,9 +24,26 @@
 # Output: [0,1]
 
 
-def two_sum(nums: list(int), target: int) -> list(int):
-    return []
+def two_sum(nums: list[int], target: int) -> list[int]:
+    if len(nums) < 2:
+        return []
+    
+    complements_hashmap = {}
+    
+    for index, num in enumerate(nums):
+        complement = target - num
 
+        if complement in complements_hashmap:
+            return [complements_hashmap[complement], index]
+
+        if num not in complements_hashmap:
+            complements_hashmap[num] = index
+
+        
+
+        
+
+        
 print(two_sum([3,4,5,6], 7))
 print(two_sum([4,5,6], 10))
 print(two_sum([5,5], 10))
