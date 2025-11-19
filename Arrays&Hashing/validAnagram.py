@@ -14,30 +14,24 @@
 # Output: false
 
 def is_anagram(s: str, t: str) -> bool:
-    """"This function checks if both strings are anagrams of each other."""
-    if len(s) != len(t): return False
+    """"Check if two strings are anagrams."""
+    
+    if len(s) != len(t):
+        return False
+    
+    counter = {}
 
-    s_counter = {}
-    t_counter = {}
+    for char in s:
+        counter[char] = counter.get(char, 0) + 1
 
-    for i in range(len(s)):
-        if s[i] in s_counter:
-            s_counter[s[i]] = s_counter[s[i]] + 1
-        else: s_counter[s[i]] = 1
-
-    for i in range(len(t)):
-        if t[i] in t_counter:
-            t_counter[t[i]] = t_counter[t[i]] + 1
-        else: t_counter[t[i]] = 1
-
-
-    for key in s_counter:
-        if key not in t_counter:
+    for char in t:
+        counter[char] = counter.get(char, 0) - 1
+        if counter[char] < 0:
             return False
-        if s_counter[key] != t_counter[key]:
-            return False
-
+        
     return True
+
+    
 
 
 
