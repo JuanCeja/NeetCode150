@@ -12,9 +12,20 @@
 
 # Output: false
 
-def has_duplicate(nums: List[int]) -> bool:
-    return True;
+
+def has_duplicate(nums: list[int]) -> bool:
+    """Check if the list contains any duplicate values."""
+    hashmap = {}
+
+    for num in nums:
+        if num not in hashmap:
+            hashmap[num] = True
+        elif num in hashmap:
+            return True
+
+    return False
 
 
-print(has_duplicate([1, 2, 3, 3]));
-print(has_duplicate([1, 2, 3, 4]));
+
+print(has_duplicate([1, 2, 3, 3]))
+print(has_duplicate([1, 2, 3, 4]))
