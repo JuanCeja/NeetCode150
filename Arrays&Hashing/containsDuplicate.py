@@ -15,14 +15,14 @@
 
 def has_duplicate(nums: list[int]) -> bool:
     """Check if the list contains any duplicate values."""
-    hashmap = {}
+    seen = set()
 
     for num in nums:
-        if num not in hashmap:
-            hashmap[num] = True
-        elif num in hashmap:
+        if num in seen:
             return True
-
+        
+        seen.add(num)
+    
     return False
 
 
