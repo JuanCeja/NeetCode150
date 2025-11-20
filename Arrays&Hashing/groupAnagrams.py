@@ -20,41 +20,22 @@
 # Output: [[""]]
 
 def group_anagrams(strs: list[str]) -> list[list[str]]:
-
-    # array we will be returning
-    grouped_anagrams = []
+    """Group strings that are anagrams of each other"""
     hashmap = {}
 
-    # create an array with 26 0's
-    
+    for s in strs:
+        count = [0] * 26
+        for char in s:
+            count[ord(char) - ord('a')] += 1
 
+        key = tuple(count)
 
-    # outer for loop
-    for current_str in strs:
-        arr = [0] * 26
-        # inner for loop
-        for char in current_str:
-        # create unique array and set it as a value
-            letter_index = ord(char) - ord('a')
-            arr[letter_index] += 1
-
-
-        # check if unique array exists in hashmap
-        my_tuple = tuple(arr)
-        
-        if my_tuple in hashmap:
-            # if so push current word to it
-            hashmap[my_tuple].append(current_str)
+        if key in hashmap:
+            hashmap[key].append(s)
         else:
-            # if not, create unique array as key and current word being the value
-            hashmap[my_tuple] = [current_str]
+            hashmap[key] = [s]
 
-
-    for value in hashmap.values():
-        grouped_anagrams.append(value)
-
-    # return array
-    return grouped_anagrams
+    return list(hashmap.values())
 
 
 print(group_anagrams(["act","pots","tops","cat","stop","hat"]))
