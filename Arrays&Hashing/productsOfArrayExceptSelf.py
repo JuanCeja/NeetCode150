@@ -16,8 +16,25 @@
 
 # Output: [0,-6,0,0,0]
 
-def product_except_self(nums: list[int]) -> listi[int]:
-    return []
+def product_except_self(nums: list[int]) -> list[int]:
+    output = [0] * len(nums)
+    
+    for i, num in enumerate(nums):
+        left = i - 1
+        right = i + 1
+        sum_of_multiplcation = 1
+        
+        while left >= 0:
+            sum_of_multiplcation *= nums[left]
+            left -= 1
+        while right < len(nums):
+            sum_of_multiplcation *= nums[right]
+            right += 1
+            
+        output[i] = sum_of_multiplcation
+        
+    
+    return output
 
 
 print(product_except_self([1,2,4,6]))
