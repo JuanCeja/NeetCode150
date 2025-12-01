@@ -7,9 +7,25 @@
 
 # Note: A board does not need to be full or be solvable to be valid.
 
-def is_valid_sudoku(board: list[list]) -> boolean:
-    
-    return true
+def is_valid_sudoku(board: list[list]) -> bool:
+    hash_set = {}
+
+    for r in range(len(board)):
+        for c in range(len(board)):
+            coordinates = (r // 3, c // 3)
+
+            if board[r][c] == ".":
+                continue
+
+            if coordinates not in hash_set:
+                hash_set[coordinates] = set()
+                hash_set[coordinates].add(int(board[r][c]))
+            elif int(board[r][c]) in hash_set[coordinates]:
+                return False
+            else:
+                hash_set[coordinates].add(int(board[r][c]))
+
+    return True
 
 
 
