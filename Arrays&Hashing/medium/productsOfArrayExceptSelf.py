@@ -19,22 +19,7 @@
 def product_except_self(nums: list[int]) -> list[int]:
     """Return product of all elements except self."""
     
-    prefix = [1] * len(nums)
-    postfix = [1] * len(nums)
     
-    for i in range(1, nums):
-        prefix[i] = prefix[i - 1] * nums[i - 1]
-
-    for i in range(nums - 2, -1, -1):
-        postfix[i] = postfix[i + 1] * nums[i + 1]
-        
-    
-    output = [0] * len(nums)
-    
-    for i in range(nums):
-        output[i] = prefix[i] * postfix[i]
-        
-    return output
 
 print(product_except_self([1,2,4,6]))
 print(product_except_self([-1,0,1,2,3]))
