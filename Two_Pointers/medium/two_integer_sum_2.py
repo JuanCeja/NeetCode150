@@ -16,7 +16,18 @@
 # Explanation:
 # The sum of 1 and 2 is 3. Since we are assuming a 1-indexed array, index1 = 1, index2 = 2. We return [1, 2].
 
-def two_sum(nums: list[int], target: int) -> list:
-    return []
+def two_sum(nums: list[int], target: int) -> list[int]:
+    left = 0
+    right = len(nums) - 1
 
-print(two_sum([1,2,3,4], 3)) # []
+    while left < right:
+        current_sum = nums[left] + nums[right]
+
+        if current_sum == target:
+            return [left + 1, right + 1]
+        elif current_sum < target:
+            left += 1
+        else:
+            right -= 1
+
+print(two_sum([1,2,3,4], 3)) # [1, 2]
