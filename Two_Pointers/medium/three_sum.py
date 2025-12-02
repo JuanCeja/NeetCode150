@@ -23,8 +23,36 @@
 # Output: [[0,0,0]]
 # Explanation: The only possible triplet sums up to 0.
 
-def threeSum(self, nums: list[int]) -> list[list[int]]:
-    return []
+def threeSum(nums: list[int]) -> list[list[int]]:
+    sorted_nums = sorted(nums)
+    target = 0
+    result = []
+
+    for index, value in enumerate(sorted_nums):
+        left = index + 1
+        right = len(sorted_nums) - 1
+
+        if index > 0 and sorted_nums[index] == sorted_nums[index - 1]:
+            continue
+
+        while left < right:
+            if value + sorted_nums[left] + sorted_nums[right] == 0:
+                result.append([sorted_nums[index], sorted_nums[left], sorted_nums[right]])
+                left += 1
+                right -= 1
+
+                while left < right and sorted_nums[left] == sorted_nums[left - 1]:
+                    left += 1
+
+                while left < right and sorted_nums[right] == sorted_nums[right + 1]:
+                    right -= 1
+                    
+            elif value + sorted_nums[left] + sorted_nums[right] < target:
+                left += 1
+            else:
+                right -= 1
+
+    return result
 
 print(threeSum([-1,0,1,2,-1,-4])) # [[-1,-1,2],[-1,0,1]]
 print(threeSum([0,1,1])) # []
