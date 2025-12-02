@@ -15,7 +15,7 @@
 # Explanation: "tabacat" is not a palindrome.
 
 def valid_palindrome(s: str) -> bool:
-    clean_string = ''.join(c for c in s if c.isalpha()).lower()
+    clean_string = ''.join(c for c in s if c.isalnum()).lower()
     
     left = 0
     right = len(clean_string) - 1
@@ -23,9 +23,9 @@ def valid_palindrome(s: str) -> bool:
     while (left <= right):
         if clean_string[left] != clean_string[right]:
             return False
-        else:
-            left += 1
-            right -= 1
+        
+        left += 1
+        right -= 1
 
     return True
 
