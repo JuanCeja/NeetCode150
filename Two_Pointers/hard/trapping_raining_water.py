@@ -7,25 +7,26 @@
 # Output: 9
 
 def trap(heights: list[int]) -> int:
-    # create our left and max
-    # create l and r
-    # result
+    left, right = 0, len(heights) - 1
+    l_max, r_max = 0, 0
+    result = 0
 
-    # while l < r
+    while left < right:
 
-        # get minimum of both
+        if heights[left] < heights[right]:
+            l_max = max(l_max, heights[left])
+            water = l_max - heights[left]
+            if water > 0:
+                result += water
+            left += 1
+        else:
+            r_max = max(r_max, heights[right])
+            water = r_max - heights[right]
+            if water > 0:
+                result += water
+            right -= 1
 
-        # calculate our possible water for that spot
-        
-        # current water = minimum - level
+    return result
 
-        # if cw > 0:
-
-            # add to cw to result
-
-        # else:
-            # if l < r move left
-                
-            # else move right
 
 print(trap([0,2,0,3,1,0,1,3,2,1])) # 9
