@@ -12,6 +12,19 @@
 # Output: 4
 
 def max_area(heights: list[int]) -> int:
+    # max area var
+    # left and right
+    # width of area
+
+    # while l < r
+        # calculate current area
+
+        # update max area if current is >
+
+        # move move smaller gate accordingly
+
+    # return our max area
+
     return 0
 
 print(max_area([1,7,2,5,4,7,3,6])) # 36
