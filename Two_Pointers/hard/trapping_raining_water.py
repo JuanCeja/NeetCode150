@@ -7,26 +7,20 @@
 # Output: 9
 
 def trap(heights: list[int]) -> int:
-    left, right = 0, len(heights) - 1
     l_max, r_max = 0, 0
+    left, right = 0, len(heights) - 1
     result = 0
 
     while left < right:
-
         if heights[left] < heights[right]:
             l_max = max(l_max, heights[left])
-            water = l_max - heights[left]
-            if water > 0:
-                result += water
+            result += l_max - heights[left]
             left += 1
         else:
             r_max = max(r_max, heights[right])
-            water = r_max - heights[right]
-            if water > 0:
-                result += water
+            result += r_max - heights[right]
             right -= 1
 
     return result
-
 
 print(trap([0,2,0,3,1,0,1,3,2,1])) # 9
