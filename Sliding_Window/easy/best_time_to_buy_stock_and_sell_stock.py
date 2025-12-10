@@ -4,20 +4,19 @@
 # 
 
 def max_profit (prices: list[int]) -> int:
-    # max profit
-    # pointers
+    max_profit = 0
+    left, right = 0, 1
 
-    # while right < len prices
+    while right < len(prices):
+        max_profit = max(prices[right] - prices[left], max_profit)
 
-        # calculate profit and assign
+        if prices[left] < prices[right]:
+            right += 1
+        else:
+            left = right
+            right += 1
 
-        # if left < move left up
-
-        # move right up
-
-    # return max profit
-
-    return 0
+    return max_profit
 
 print(max_profit([10,1,5,6,7,1])) # 6
 print(max_profit([10,8,7,5,2])) # 0
