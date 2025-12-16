@@ -7,31 +7,20 @@
 # 
 
 def character_replacement(s: str, k: int) -> int:
-    counter = {}
-    longest_repeating_char = 1
+    count = {}
     left = 0
-    replacements = k
+    res = 0
 
-    for char in s:
-        if char in counter:
-            counter[char] += 1
-        else:
-            counter[char] = 1
+    for r in range(len(s)):
+        count[s[r]] = count.get(s[r], 0) + 1
 
-    most_freq_char = max(counter, key = counter.get)
-    
-    for r in range(1, len(s)):
+        while (r - left + 1) - max(count.values()) > k:
+            count[s[left]] -= 1
+            left += 1
+            
+        res = max(res, r - left + 1)
 
-        if s[r] == most_freq_char:
-            longest_repeating_char = max(r - (left + 1), longest_repeating_char)
-        elif s[r] != most_freq_char and replacements > 0:
-            longest_repeating_char = max(r - (left + 1), longest_repeating_char)
-            replacements -= 1
-        else:
-            left = r
-            replacements = k
-
-    return longest_repeating_char
+    return res
 
 print(character_replacement("XYYX", 2)) # 4
 print(character_replacement("AAABABB", 1)) # 5
