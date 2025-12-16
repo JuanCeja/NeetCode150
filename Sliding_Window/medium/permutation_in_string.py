@@ -11,28 +11,27 @@
 def permutation_in_string(s1: str, s2: str) -> bool:
     if len(s1) > len(s2):
         return False
-    
-    frequency_counter_s1 = {}
-    frequency_counter_s2 = {}
-    s1_len = len(s1)
-    window_size = len(s1)
-    
-    for i in range(s1_len):
-        frequency_counter_s1[s1[i]] = frequency_counter_s1.get(s1[i], 0) + 1
-        frequency_counter_s2[s2[i]] = frequency_counter_s2.get(s2[i], 0) + 1
 
-    if frequency_counter_s1 == frequency_counter_s2:
+    s1_count = {}
+    window_count = {}
+
+    for i in range(len(s1)):
+        s1_count[s1[i]] = s1_count.get(s1[i], 0) + 1
+        window_count[s2[i]] = window_count.get(s2[i], 0) + 1
+
+    if s1_count == window_count:
         return True
 
-    for j in range(window_size, len(s2)):
-        if s2[j - window_size] in frequency_counter_s2:
-            frequency_counter_s2[s2[j - window_size]] -= 1
-            if frequency_counter_s2[s2[j - window_size]] == 0:
-                del frequency_counter_s2[s2[j - window_size]]
-                
-        frequency_counter_s2[s2[j]] = frequency_counter_s2.get(s2[j], 0) + 1
+    for r in range(len(s1), len(s2)):
+        left_char = r - len(s1)
+        window_count[s2[left_char]] -= 1
 
-        if frequency_counter_s1 == frequency_counter_s2:
+        if window_count[s2[left_char]] == 0:
+            del window_count[s2[left_char]]
+
+        window_count[s2[r]] = window_count.get(s2[r], 0) + 1
+
+        if s1_count == window_count:
             return True
 
     return False
