@@ -9,19 +9,17 @@
 
 def min_window_substring(s: str, t: str) -> str:
     if len(s) < len(t):
-        return ""
-    
+            return ""
+
     t_count, window = {}, {}
-    
-    for c in t:
-        t_count[c] = t_count.get(c, 0) + 1
+    for i in t:
+        t_count[i] = t_count.get(i, 0) + 1
         
-    have, need = 0, len(t_count)
     res, res_len = "", float("inf")
+    have, need = 0, len(t_count)
     left = 0
-        
+    
     for right in range(len(s)):
-        
         char = s[right]
         window[char] = window.get(char, 0) + 1
         
@@ -30,9 +28,9 @@ def min_window_substring(s: str, t: str) -> str:
             
         while have == need:
             if right - left + 1 < res_len:
-                res = s[left:right + 1]
+                res = s[left : right + 1]
                 res_len = right - left + 1
-            
+                
             removed_char = s[left]
             window[removed_char] -= 1
             
@@ -40,7 +38,7 @@ def min_window_substring(s: str, t: str) -> str:
                 have -= 1
                 
             left += 1
-                
+                    
     return res if res_len < float("inf") else ""
 
 print(min_window_substring("OUZODYXAZV", "XYZ")) # "YXAZ"
