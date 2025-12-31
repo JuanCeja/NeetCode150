@@ -23,7 +23,7 @@ def max_sliding_window(nums: list[int], k: int) -> list[int]:
             
         dq.append(i)
         
-        if i - k + 1 > k:
+        if i >= k - 1:
             res.append(nums[dq[0]])
             
     return res
