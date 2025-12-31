@@ -1,38 +1,25 @@
 # 
 # 
 # 
-# 
-# 
-# 
-# 
-# 
 
 def is_valid(s: str) -> bool:
-    # stack
     stack = []
-    # iterate s
+    close_to_open = {
+        ")": "(",
+        "}": "{",
+        "]": "["
+    }
+    
     for char in s:
-        # if an opening bracket
-        if char == "(" or char == "{" or char == "[":
-            # push to stack
-            stack.append(s)
-            continue
-        # if ) and stack -1 is ( pop
-        if char == ")" and stack[-1] == "(":
+        if char in close_to_open:
+            if not stack or close_to_open[char] != stack[-1]:
+                return False
             stack.pop()
-
-        if char == "}" and stack[-1] == "{":
-            stack.pop()
-
-        if char == "]" and stack[-1] == "[":
-            stack.pop()
+        else:
+            stack.append(char)
         
-    
-    # return stack empty = true else false
-    return True if len(stack) == 0 else False
-    
-    
-    return True
+    return len(stack) == 0
+
 
 print(is_valid("[]")) # true
 print(is_valid("([{}])")) # true
