@@ -10,8 +10,8 @@ def daily_temperature(temperatures: list[int]) -> list[int]:
     for i in range(len(temperatures)):
         
         while stack and temperatures[i] > temperatures[stack[-1]]:
-            result[stack[-1]] = i - stack[-1]
-            stack.pop()
+            popped_index = stack.pop()
+            result[popped_index] = i - popped_index
             
         stack.append(i)
         
