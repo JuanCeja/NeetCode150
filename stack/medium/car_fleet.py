@@ -4,25 +4,19 @@
 
 
 def car_fleet(target: int, position: list[int], speed: list[int]) -> int:
-    fleets = 0
     stack = []
-    
-    # iterate position and speed
-    for i in range(len(position)):
-    
-        # get length of time to target
-        time_to_target = target / speed[i]
-        
-        # while current length of time < last in the stack 
-        while stack and time_to_target < stack[-1]:
-            # keep popping until stack is empty, add to fleet, then add current time to stack
-            while stack:
-                stack.pop()
-            fleet += 1
-        # add current length of time to stack
-        stack.append(time_to_target)
-    # return fleets
-    return fleets
+
+    sorted_fleets = sorted([p, s] for p, s in zip(position, speed))
+
+    for i in range(len(sorted_fleets))[::-1]:
+        time = (target - sorted_fleets[i][0]) / sorted_fleets[i][1]
+
+        stack.append(time)
+
+        if len(stack) >= 2 and stack[-1] <= stack[-2]:
+            stack.pop()
+
+    return len(stack)
 
 
 print(car_fleet(10, [1, 4], [3, 2])) # 1
