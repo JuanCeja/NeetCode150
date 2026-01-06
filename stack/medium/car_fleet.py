@@ -6,14 +6,15 @@
 def car_fleet(target: int, position: list[int], speed: list[int]) -> int:
     stack = []
 
-    sorted_fleets = sorted([p, s] for p, s in zip(position, speed))
+    cars = sorted(zip(position, speed))
+    print(cars)
 
-    for i in range(len(sorted_fleets))[::-1]:
-        time = (target - sorted_fleets[i][0]) / sorted_fleets[i][1]
+    for pos, spd in reversed(cars):
+        time = (target - pos) / spd
 
         stack.append(time)
 
-        if len(stack) >= 2 and stack[-1] <= stack[-2]:
+        if len(stack) > 1 and stack[-1] <= stack[-2]:
             stack.pop()
 
     return len(stack)
