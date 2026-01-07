@@ -6,6 +6,18 @@
 
 
 def binary_search(nums: list[int], target: int) -> int:
+    # create pointers
+    
+    # while l <= right
+    
+        # mid = right + left / 2
+        
+        # if mid = target return mid
+        
+        # elif target > move up left
+        
+        # else move down right
+        
     
 
 
