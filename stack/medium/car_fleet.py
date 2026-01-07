@@ -7,7 +7,6 @@ def car_fleet(target: int, position: list[int], speed: list[int]) -> int:
     stack = []
 
     cars = sorted(zip(position, speed))
-    print(cars)
 
     for pos, spd in reversed(cars):
         time = (target - pos) / spd
