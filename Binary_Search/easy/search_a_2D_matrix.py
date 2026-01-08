@@ -10,19 +10,22 @@ def search_matrix(matrix: list[list[int]], target: int) -> bool:
     while left < right:
         mid = (right + left) // 2
 
-        if target >= matrix[mid][0] and target <= matrix[mid][-1]:
+        if matrix[mid][0] <= target <= matrix[mid][-1]:
+            row = matrix[mid]
             
-            inner_left, inner_right = 0, len(matrix[mid])
+            inner_left, inner_right = 0, len(row)
 
             while inner_left < inner_right:
-                mid = (inner_right + inner_left) // 2
+                inner_mid = (inner_right + inner_left) // 2
 
-                if matrix[mid][mid] == target: 
+                if row[inner_mid] == target: 
                     return True
-                elif target > matrix[mid][mid]:
-                    inner_left = mid + 1
+                elif target > row[inner_mid]:
+                    inner_left = inner_mid + 1
                 else:
-                    inner_right = mid
+                    inner_right = inner_mid
+                    
+            return False
 
         elif target > matrix[mid][-1]:
             left = mid + 1
