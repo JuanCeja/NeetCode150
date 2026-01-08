@@ -10,8 +10,20 @@ def search_matrix(matrix: list[list[int]], target: int) -> bool:
     while left < right:
         mid = (right + left) // 2
 
-        if target in matrix[mid]:
-            return True
+        if target >= matrix[mid][0] and target <= matrix[mid][-1]:
+            
+            inner_left, inner_right = 0, len(matrix[mid])
+
+            while inner_left < inner_right:
+                mid = (inner_right + inner_left) // 2
+
+                if matrix[mid][mid] == target: 
+                    return True
+                elif target > matrix[mid][mid]:
+                    inner_left = mid + 1
+                else:
+                    inner_right = mid
+
         elif target > matrix[mid][-1]:
             left = mid + 1
         else:
