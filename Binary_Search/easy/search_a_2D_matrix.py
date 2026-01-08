@@ -4,24 +4,20 @@
 # 
 # 
 
-search_matrix(matrix: list[list[int]], target: int) -> bool:
-    # use binary search in the outer arr
+def search_matrix(matrix: list[list[int]], target: int) -> bool:
+    left, right = 0, len(matrix)
+    
+    while left < right:
+        mid = (right + left) // 2
 
-        # check if target is in between first and last num of our mid array
+        if target in matrix[mid]:
+            return True
+        elif target > matrix[mid][-1]:
+            left = mid + 1
+        else:
+            right = mid
 
-            # if so, use binary search in that array
-
-                # if result is not found return false
-
-        # if target > then last value in mid array
-
-            # left = mid + 1
-
-        # else 
-
-            # right = mid
-
-
+    return False
 
 print(search_matrix([[1,2,4,8],[10,11,12,13],[14,20,30,40]], 10)) # true
 print(search_matrix([[1,2,4,8],[10,11,12,13],[14,20,30,40]], 15)) # false
