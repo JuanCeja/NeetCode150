@@ -7,7 +7,6 @@ class TimeMap:
         if key not in self.store:
             self.store[key] = []
         self.store[key].append((value, timestamp))
-    
 
     def get(self, key: str, timestamp: int) -> str:
         if key not in self.store:
@@ -20,9 +19,12 @@ class TimeMap:
             mid = (l + r) // 2
             mid_timestamp = self.store[key][mid][1]
 
+            if mid_timestamp == timestamp:
+                return self.store[key][mid][0]
+
             if mid_timestamp <= timestamp:
-                result = self.store[key][mid][0]
                 l = mid + 1
+                result = self.store[key][mid][0]
             else:
                 r = mid - 1
 
