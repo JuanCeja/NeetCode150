@@ -23,7 +23,7 @@ def search(nums: list[int], target: int) -> int:
             else:
                 l = mid + 1
         else:
-            if mid_value <= target < nums[r]:
+            if mid_value <= target <= nums[r]:
                 l = mid + 1
             else:
                 r = mid - 1
