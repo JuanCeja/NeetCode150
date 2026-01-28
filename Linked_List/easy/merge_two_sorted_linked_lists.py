@@ -27,13 +27,19 @@ class Solution:
         head = new_node
 
         while list1 and list2:
-            if list1.val >= list2.val:
+            if list1.val <= list2.val:
                 new_node.next = list1
-                if list1.next:
-                    list1 = list1.next
+                new_node = new_node.next
+                list1 = list1.next
             else:
                 new_node.next = list2
-                if list2.next:
-                    list2 = list2.next
-                    
+                new_node = new_node.next
+                list2 = list2.next
+                
+        if list1:
+            new_node.next = list1
+        
+        if list2:
+            new_node.next = list2
+        
         return head.next
