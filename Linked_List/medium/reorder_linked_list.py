@@ -23,7 +23,11 @@ class Solution:
             slow = slow.next
             fast = fast.next.next
             
-        mid_half = self.reverse_list(slow)
+        fast.next = None
+        second_half = self.reverse_list(slow)
+
+        return self.merge_lists(head, second_half)
+        
         
     def reverse_list(self, head: Optional[ListNode]) -> Optional[ListNode]:
         prev = None
@@ -37,3 +41,23 @@ class Solution:
             
         return prev
     
+
+    def merge_lists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+        if not list1 or not list2:
+            return list1 or list2
+        
+        dummy = ListNode()
+        curr = dummy.next
+        count = 0
+
+        while list1 and list2:
+            if count % 2 == 0:
+                curr.next = list1
+                curr = list1
+                list1 = list1.next
+            else:
+                curr.next = list2
+                curr = list2
+                list2 = list2.next
+
+        return dummy.next
