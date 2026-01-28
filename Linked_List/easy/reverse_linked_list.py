@@ -17,14 +17,17 @@ from typing import Optional
 
 class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        prev = head
+        if head == None: return head
+        
         forward = head.next
-        head.next = None
+        prev = head
+        prev.next = None
         
         while forward:
             fast_forward = forward.next
             forward.next = prev
             prev = forward
             forward = fast_forward
-            
+            head = prev
+
         return head
