@@ -6,6 +6,9 @@
 # 
 # 
 
+from typing import Optional
+
+
 class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
@@ -20,19 +23,17 @@ class Solution:
             slow = slow.next
             fast = fast.next.next
             
-        mid = slow
+        mid_half = self.reverse_list(slow)
         
-    def reverse_list(head: Optional[ListNode]) -> Optional[ListNode]:
-        
-        prev = ListNode()
+    def reverse_list(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        prev = None
         curr = head
 
         while curr:
-            next = curr.next
+            next_node = curr.next
             curr.next = prev
             prev = curr
-            curr = next
+            curr = next_node
             
-        return prev.next
+        return prev
     
-    # im working on getting my reverse linked list to work
