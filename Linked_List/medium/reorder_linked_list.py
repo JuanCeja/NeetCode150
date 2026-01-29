@@ -16,6 +16,9 @@ class ListNode:
 
 class Solution:
     def reorderList(self, head: Optional[ListNode]) -> None:
+        if not head or not head.next:
+            return
+        
         slow = head
         fast = head
         
@@ -23,10 +26,12 @@ class Solution:
             slow = slow.next
             fast = fast.next.next
             
-        fast.next = None
-        second_half = self.reverse_list(slow)
+        second = slow.next
+        slow.next = None
+        second_half = self.reverse_list(second)
+        self.merge_lists(head, second_half)
 
-        return self.merge_lists(head, second_half)
+        return None
         
         
     def reverse_list(self, head: Optional[ListNode]) -> Optional[ListNode]:
@@ -42,12 +47,12 @@ class Solution:
         return prev
     
 
-    def merge_lists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+    def merge_lists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> None:
         if not list1 or not list2:
             return list1 or list2
         
         dummy = ListNode()
-        curr = dummy.next
+        curr = dummy
         count = 0
 
         while list1 and list2:
@@ -59,5 +64,12 @@ class Solution:
                 curr.next = list2
                 curr = list2
                 list2 = list2.next
+            count += 1
+            
+        if list1:
+            curr.next = list1
+        
+        if list2:
+            curr.next = list2
 
-        return dummy.next
+        return
