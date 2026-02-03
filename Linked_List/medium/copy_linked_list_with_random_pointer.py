@@ -10,20 +10,19 @@ class Node:
 
 class Solution:
     def copyRandomList(self, head: Optional[Node]) -> Optional[Node]:
-        curr = head
-        dummy = Node(0, head, 0)
-        map = {}
+        oldToCopy = {None: None}
+        cur = head
         
-        while curr:
-            map[curr] = Node(curr.val, curr.next, curr.random)
-            curr = curr.next
+        while cur:
+            oldToCopy[cur] = Node(cur.val)
+            cur = cur.next
             
-        curr = head
+        cur = head
         
-        while curr:
-            dummy.val = map[curr].val
-            dummy.next = map[curr].next
-            dummy.random = map[curr].random
-            curr = curr.next
-        
-        return dummy
+        while cur:
+            new_node = oldToCopy[cur]
+            new_node.next = oldToCopy[cur.next]
+            new_node.random = oldToCopy[cur.random]
+            cur = cur.next
+            
+        return oldToCopy[head]
