@@ -9,33 +9,30 @@ class ListNode:
 class Solution:
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
         curr_1, curr_2 = l1, l2
-        carry_over = False
-        product = ListNode()
+        carry_over = 0
+        dummy = ListNode(0)
+        current = dummy
         
-        while (curr_1 is not None or curr_2 is not None) and (curr_1.next and curr_2.next):
-            sum = curr_1.val + curr_2.val
+        while curr_1 or curr_2 or carry_over:
+            sum = (curr_1.val if curr_1 else 0) + (curr_2.val if curr_2 else 0)
             
-            if carry_over == True:
-                sum += 1
-                
-            if sum > 10:
-                sum = sum % 10
-                carry_over = True
+            total = sum + carry_over
+            carry = total // 10
+            digit = total % 10
             
-            product.val = sum
-            carry_over = False
-            product.next = ListNode
+            current.next = ListNode(digit)
+            current = current.next
             curr_1 = curr_1.next
             curr_2 = curr_2.next
         
         while curr_1.next is not None:
-            product.val = curr_1.val
-            product.next = ListNode()
+            current.val = curr_1.val
+            current.next = ListNode()
             curr_1 = curr_1.next
 
         while curr_2.next is not None:
-            product.val = curr_2.val
-            product.next = ListNode()
+            current.val = curr_2.val
+            current.next = ListNode()
             curr_2 = curr_2.next
             
-        return product
+        return dummy
