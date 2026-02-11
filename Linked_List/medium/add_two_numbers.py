@@ -8,31 +8,22 @@ class ListNode:
 
 class Solution:
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
-        curr_1, curr_2 = l1, l2
-        carry_over = 0
         dummy = ListNode(0)
-        current = dummy
+        curr = dummy
+        carry = 0
         
-        while curr_1 or curr_2 or carry_over:
-            sum = (curr_1.val if curr_1 else 0) + (curr_2.val if curr_2 else 0)
+        while l1 or l2 or carry:
+            val1 = l1.val if l1 else 0
+            val2 = l2.val if l2 else 0
             
-            total = sum + carry_over
+            total = val1 + val2 + carry
             carry = total // 10
             digit = total % 10
             
-            current.next = ListNode(digit)
-            current = current.next
-            curr_1 = curr_1.next
-            curr_2 = curr_2.next
-        
-        while curr_1.next is not None:
-            current.val = curr_1.val
-            current.next = ListNode()
-            curr_1 = curr_1.next
-
-        while curr_2.next is not None:
-            current.val = curr_2.val
-            current.next = ListNode()
-            curr_2 = curr_2.next
+            curr.next = ListNode(digit)
+            curr = curr.next
             
-        return dummy
+            l1 = l1.next if l1 else None
+            l2 = l2.next if l2 else None
+            
+        return dummy.next
