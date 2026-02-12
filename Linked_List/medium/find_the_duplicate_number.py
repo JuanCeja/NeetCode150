@@ -17,8 +17,7 @@ class Solution:
             slow2 = nums[slow2]
             slow = nums[slow]
             
-            if slow == slow2:
-                return slow
+        return slow
 
 
 # nums = [1,2,3,2,2]
