@@ -25,7 +25,7 @@ class LRUCache:
         
         else:
             node = Node(key, value)
-            while len(self.dic) >= self.capacity:
+            if len(self.dic) >= self.capacity:
                 self.remove()
         
             self.insert(node)
@@ -37,13 +37,13 @@ class LRUCache:
         node.next, self.right.prev = self.right, node
         self.dic[node.key] = node
         
-    def remove(self, node: Node):
-        curr = self.left.next
-        next = curr.next
+    def remove(self):
+        lru = self.left.next
+        next = lru.next
         self.left.next = next
         next.prev = self.left
-        curr.next, curr.prev = None, None
-        del self.dic[node]
+        lru.next, lru.prev = None, None
+        del self.dic[lru.key]
         
     def move_to_recent(self, node: Node):
         prev = node.prev
@@ -51,5 +51,6 @@ class LRUCache:
         last_node = self.right
         
         prev.next, next.prev = next, prev
-        last_node.next, node.prev = node, last_node
-        node.next, self.right.prev = self.right, node
+        prev_right = self.right.prev
+        last_node.prev, node.next = node, last_node
+        node.prev, prev_right.next = prev_right, node
