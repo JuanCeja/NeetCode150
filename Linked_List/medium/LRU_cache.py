@@ -7,50 +7,35 @@ class LRUCache:
 
     def __init__(self, capacity: int):
         self.capacity = capacity
-        self.dic = {}
+        self.cache = {}
+        
         self.left, self.right = Node(0,0), Node(0,0)
         self.left.next, self.right.prev = self.right, self.left
 
     def get(self, key: int) -> int:
-        if key in self.dic:
-            self.move_to_recent(self.dic[key])
-            return self.dic[key].value
-        else:
-            return -1
+        if key in self.cache:
+            self.remove(self.cache[key])
+            self.insert(self.cache[key])
+            return self.cache[key].value
+        return -1
 
     def put(self, key: int, value: int) -> None:
-        if key in self.dic:
-            self.dic[key].value = value
-            self.move_to_recent(self.dic[key])
+        if key in self.cache:
+            self.remove(self.cache[key])
         
-        else:
-            node = Node(key, value)
-            if len(self.dic) >= self.capacity:
-                self.remove()
+        self.cache[key] = Node(key, value)
+        self.insert(self.cache[key])
         
-            self.insert(node)
+        if len(self.cache) > self.capacity:
+            lru = self.left.next
+            self.remove(lru)
+            del self.cache[lru.key]
     
     def insert(self, node: Node):
-        prev = self.right.prev
-        prev.next = node
-        node.prev = prev
-        node.next, self.right.prev = self.right, node
-        self.dic[node.key] = node
+        prev, next = self.right.prev, self.right
+        prev.next = next.prev = node
+        node.next, node.prev = next, prev
         
-    def remove(self):
-        lru = self.left.next
-        next = lru.next
-        self.left.next = next
-        next.prev = self.left
-        lru.next, lru.prev = None, None
-        del self.dic[lru.key]
-        
-    def move_to_recent(self, node: Node):
-        prev = node.prev
-        next = node.next
-        last_node = self.right
-        
+    def remove(self, node: Node):
+        prev, next = node.prev, node.next
         prev.next, next.prev = next, prev
-        prev_right = self.right.prev
-        last_node.prev, node.next = node, last_node
-        node.prev, prev_right.next = prev_right, node
