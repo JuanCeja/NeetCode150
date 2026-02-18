@@ -22,7 +22,8 @@ class Solution:
                 merged_lists.append(self.mergeSortedLists(l1, l2))
 
             lists = merged_lists
-            return lists[0]
+        
+        return lists[0]
 
 
 
