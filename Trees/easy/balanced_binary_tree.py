@@ -7,4 +7,22 @@ class TreeNode:
 
 class Solution:
     def isBalanced(self, root: Optional[TreeNode]) -> bool:
+        self.right, self.left = 0, 0
         
+        def height(node):
+            if not node:
+                return 0
+            
+            if abs(self.right - self.left) > 1:
+                return False
+            
+            left_height = height(node.left)
+            right_height = height(node.right)
+            
+            self.right = right_height
+            self.left = left_height
+            
+            return max(left_height, right_height) + 1
+        
+        height(root)
+        return True
