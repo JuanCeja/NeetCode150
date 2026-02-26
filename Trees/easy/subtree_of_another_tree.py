@@ -10,13 +10,9 @@ class Solution:
         if not root:
             return False
         
-        if subRoot.val and root.val == subRoot.val:
-            return self.is_same_tree(root, subRoot)
-        else:
-            if root.left.val == subRoot.val:
-                return self.isSubtree(root.left, subRoot)
-            else:
-                return self.isSubtree(root.right, subRoot)
+        return (self.is_same_tree(root, subRoot) or
+                self.isSubtree(root.left, subRoot) or
+                self.isSubtree(root.right, subRoot))
         
     def is_same_tree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
         if not p and not q:
