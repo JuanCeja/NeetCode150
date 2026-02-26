@@ -7,4 +7,23 @@ class TreeNode:
 
 class Solution:   
     def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
+        if not root:
+            return False
         
+        if subRoot.val and root.val == subRoot.val:
+            return self.is_same_tree(root, subRoot)
+        else:
+            if root.left.val == subRoot.val:
+                return self.isSubtree(root.left, subRoot)
+            else:
+                return self.isSubtree(root.right, subRoot)
+        
+    def is_same_tree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
+        if not p and not q:
+            return True
+        if not p or not q:
+            return False
+        if p.val != q.val:
+            return False
+        
+        return self.is_same_tree(p.left, q.left) and self.is_same_tree(p.right, q.right)
