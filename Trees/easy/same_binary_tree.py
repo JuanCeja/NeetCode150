@@ -7,24 +7,13 @@ class TreeNode:
 
 class Solution:
     def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
-        is_same = 0
+        if not p and not q:
+            return True
         
-        def dfs(node_p, node_q) -> int:
-            if not node:
-                return 0
-            
-            if node_p.left.val == node_q.left.val:
-                dfs(node_p.left)
-                dfs(node_q.left)
-                
-            if node_p.right.val == node_q.right.val:
-                dfs(node_p.right)
-                dfs(node_q.right)
-                
-            
-            else:
-                return 1
-            
-        dfs(p)
-        dfs(q)
-        return is_same == 0
+        if not p or not q:
+            return False
+        
+        if p.val != q.val:
+            return False
+        
+        return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
