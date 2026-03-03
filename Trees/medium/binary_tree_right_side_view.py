@@ -17,21 +17,17 @@ class Solution:
         queue = deque([root])
         
         while queue:
-            qLen = len(queue)
+            level_size = len(queue)
             
-            for _ in range(qLen - 1):
+            for i in range(level_size):
                 node = queue.popleft()
+                
                 if node.left:
                     queue.append(node.left)
                 if node.right:
                     queue.append(node.right)
                     
-            last_node = queue.popleft()
-            
-            if last_node.left:
-                queue.append(last_node.left)
-            if last_node.right:
-                queue.append(last_node.right)
-            result.append(last_node.val)
-            
+                if i == level_size - 1:
+                    result.append(node.val)
+
         return result
