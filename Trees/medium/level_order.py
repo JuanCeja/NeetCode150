@@ -18,15 +18,16 @@ class Solution:
         
         while queue:
             level = []
-            qLen = len(queue)
+            level_size = len(queue)
 
-            for iteration in range(qLen):
+            for _ in range(level_size):
                 node = queue.popleft()
+                level.append(node.val)
+                
                 if node.left:
                     queue.append(node.left)
                 if node.right:
                     queue.append(node.right)
-                level.append(node.val)
 
             result.append(level)
             
