@@ -25,18 +25,16 @@
 
 
 def two_sum(nums: list[int], target: int) -> list[int]:
-    """Find two indices where nums[i] + nums[j] == target."""
-    hashmap = {}
+    seen = {}
 
-    for i, num in enumerate(nums):
+    for index, num in enumerate(nums):
         complement = target - num
+        if complement in seen:
+            return [seen[complement], index]
+        seen[num] = index
 
-        if complement in hashmap:
-            return [hashmap[complement], i]
-        
-        hashmap[num] = i
 
-        
+
 
 print(two_sum([3,4,5,6], 7))
 print(two_sum([4,5,6], 10))

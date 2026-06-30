@@ -14,18 +14,13 @@
 
 
 def has_duplicate(nums: list[int]) -> bool:
-    """Check if the list contains any duplicate values."""
     seen = set()
 
     for num in nums:
         if num in seen:
             return True
-        
-        seen.add(num)
-    
-    return False
-
-
+        else:
+            seen.add(num)
 
 print(has_duplicate([1, 2, 3, 3]))
 print(has_duplicate([1, 2, 3, 4]))

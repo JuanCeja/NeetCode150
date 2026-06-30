@@ -16,26 +16,16 @@
 # Output: [7]
 
 def top_k_frequent(nums: list[int], k: int) -> list[int]:
-    """Return the k most frequent elements from the array."""
     frequency_counter = {}
 
     for num in nums:
-        frequency_counter[num] = frequency_counter.get(num, 0) + 1
-
-    bucket = [[] for _ in range(len(nums) +1 )]
-    
-    for num, freq in frequency_counter.items():
-        bucket[freq].append(num)
-    
-    result = []
-    
-    for i in range(len(bucket) - 1, 0, -1):
-        for num in bucket[i]:
-            result.append(num)
-            if len(result) == k:
-                return result
+        if num in frequency_counter:
+            frequency_counter[num] += 1
+        else:
+            frequency_counter[num] = 1
             
 
+    
 
 print(top_k_frequent([1,2,2,3,3,3], 2))
 print(top_k_frequent([7, 7], 1))

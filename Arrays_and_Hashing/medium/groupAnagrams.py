@@ -20,22 +20,18 @@
 # Output: [[""]]
 
 def group_anagrams(strs: list[str]) -> list[list[str]]:
-    """Group strings that are anagrams of each other"""
-    hashmap = {}
+    groups = defaultdict(list)
 
     for s in strs:
-        count = [0] * 26
+        key = [0] * 26
+
         for char in s:
-            count[ord(char) - ord('a')] += 1
+            letter = ord(char) - ord("a")
+            key[letter] += 1
 
-        key = tuple(count)
+        groups[tuple(key)].append(s)
 
-        if key in hashmap:
-            hashmap[key].append(s)
-        else:
-            hashmap[key] = [s]
-
-    return list(hashmap.values())
+    return list(groups.values())
 
 
 print(group_anagrams(["act","pots","tops","cat","stop","hat"]))

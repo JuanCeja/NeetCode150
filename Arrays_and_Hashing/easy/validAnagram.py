@@ -14,25 +14,18 @@
 # Output: false
 
 def is_anagram(s: str, t: str) -> bool:
-    """"Check if two strings are anagrams."""
-    
     if len(s) != len(t):
         return False
-    
-    counter = {}
+
+    s_map = {}
+    t_map = {}
 
     for char in s:
-        counter[char] = counter.get(char, 0) + 1
-
+        s_map[char] = s_map.get(char, 0) + 1
     for char in t:
-        counter[char] = counter.get(char, 0) - 1
-        if counter[char] < 0:
-            return False
-        
-    return True
+        t_map[char] = t_map.get(char, 0) + 1
 
-    
-
+    return s_map == t_map
 
 
 print(is_anagram("racecar", "carrace"))
