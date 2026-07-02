@@ -14,35 +14,30 @@
 # Output: ["we","say",":","yes"]
 
 def encode (strs: list[str]) -> str:
-    """Encode list of strings to a single string."""
     encoded = ""
-    
+
     for s in strs:
         encoded += str(len(s)) + "#" + s
-        
+    
     return encoded
-        
+
 
 def decode (s: str) -> list[str]:
-    """Decode a single string back to list of strings."""
-    
-    result = []
+    decoded = []
     i = 0
     
     while i < len(s):
         j = i
-        
         while s[j] != "#":
             j += 1
-            
-        length = int(s[i : j])
-        
-        result.append(s[j + 1 : j + 1 + length])
-        
+
+        length = int(s[i:j])
+        word = s[j + 1 : j + 1 + length]
+        decoded.append(word)
+
         i = j + 1 + length
-        
-    return result
-    
+
+    return decoded
 
 print(encode(["neet", "code", "love", "you"]))
 print(decode("4#neet4#code4#love3#you"))
