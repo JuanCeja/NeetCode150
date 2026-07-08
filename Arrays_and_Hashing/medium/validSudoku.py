@@ -11,25 +11,7 @@ from collections import defaultdict
 
 
 def is_valid_sudoku(board: list[list[str]]) -> bool:
-    rows = defaultdict(set)
-    cols = defaultdict(set)
-    boxes = defaultdict(set)
-
-    for r in range(9):
-        for c in range(9):
-            if board[r][c] == ".":
-                continue
-
-            num = board[r][c]
-
-            if num in rows[r] or num in cols[c] or num in boxes[(r // 3, c // 3)]:
-                return False
     
-            rows[r].add(num)
-            cols[c].add(num)
-            boxes[(r // 3, c // 3)].add(num)
-
-    return True
 
 
 board_1 = [["1","2",".",".","3",".",".",".","."],
