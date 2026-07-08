@@ -11,7 +11,31 @@ from collections import defaultdict
 
 
 def is_valid_sudoku(board: list[list[str]]) -> bool:
-    
+    rows_seen = set()
+    cols_seen = set()
+    boxes_seen = set()
+
+    for r, row in enumerate(board):
+        for c, val in enumerate(row):
+            if val == ".":
+                continue
+
+            if (r, val) in rows_seen:
+                return False
+            rows_seen.add((r, val))
+
+            if (c, val) in cols_seen:
+                return False
+            cols_seen.add((c, val))
+
+            box_row = r // 3
+            box_col = c // 3
+
+            if (box_row, box_col, val) in boxes_seen:
+                return False
+            boxes_seen.add((box_row, box_col, val))
+
+    return True
 
 
 board_1 = [["1","2",".",".","3",".",".",".","."],

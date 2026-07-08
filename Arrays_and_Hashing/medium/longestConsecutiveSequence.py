@@ -14,23 +14,7 @@
 # Output: 7
 
 def longest_consecutive(nums: list[int]) -> int:
-    if not nums:
-        return 0
     
-    longest_sequence = 1
-    num_set = set(nums)
-
-    for num in nums:
-        if num - 1 not in num_set:
-            current_sequence = 1
-
-            while num + 1 in num_set:
-                current_sequence += 1
-                num += 1
-        
-            longest_sequence = max(longest_sequence, current_sequence)
-
-    return longest_sequence
 
 print(longest_consecutive([2,20,4,10,3,4,5])) # 4
 print(longest_consecutive([0,3,2,5,4,6,1,1])) # 7
