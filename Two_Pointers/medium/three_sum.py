@@ -24,7 +24,35 @@
 # Explanation: The only possible triplet sums up to 0.
 
 def threeSum(nums: list[int]) -> list[list[int]]:
-    
+    sorted_nums = sorted(nums)
+    res = []
+
+    for idx, num in enumerate(sorted_nums):
+
+        left, right = idx + 1, len(sorted_nums) - 1
+
+        if idx > 0 and num == sorted_nums[idx - 1]:
+            continue
+
+        while left < right:
+            total = num + sorted_nums[left] + sorted_nums[right]
+
+            if total == 0:
+                res.append([num, sorted_nums[left], sorted_nums[right]])
+                left += 1
+                right -= 1
+
+                while left < right and sorted_nums[left] == sorted_nums[left - 1]:
+                    left += 1
+                while left < right and sorted_nums[right] == sorted_nums[right + 1]:
+                    right -= 1
+            elif total > 0:
+                right -= 1
+            else:
+                left += 1
+
+    return res
+
 
 print(threeSum([-1,0,1,2,-1,-4])) # [[-1,-1,2],[-1,0,1]]
 print(threeSum([0,1,1])) # []
