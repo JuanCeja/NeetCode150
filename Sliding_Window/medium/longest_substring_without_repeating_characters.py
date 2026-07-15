@@ -5,27 +5,18 @@
 # 
 
 def length_of_longest_substring(s: str) -> int:
-    l,r = 0, 1
-    seen = {}
-    longest_substring = 1
-    seen[s[l]] = 0
+    char_set = set()
+    l = 0
+    res = 0
 
-    while r < len(s):
-        if s[r] not in seen:
-            seen[s[r]] = r
-            r += 1
-            longest_substring = max(longest_substring, len(s[l:r]))
-        else:
-            if seen[s[r]] < l:
-                seen[s[r]] = r
-                r += 1
-                longest_substring = max(longest_substring, len(s[l:r]))
-            else:
-                l = r
-                r += 1
+    for r in range(len(s)):
+        while s[r] in char_set:
+            char_set.remove(s[l])
+            l += 1
+        char_set.add(s[r])
+        res = max(res, r - l + 1)
 
-    return longest_substring
-
+    return res
 
 
 print(length_of_longest_substring("zxyzxyz")) # 3
