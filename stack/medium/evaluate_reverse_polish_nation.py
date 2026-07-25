@@ -7,21 +7,15 @@ def evaluate_reverse_polish_notation(tokens: list[str]) -> int:
 
     for num in tokens:
         if num in "+-*/":
+            num_1 = stack.pop()
+            num_2 = stack.pop()
             if num == "+":
-                num_1 = stack.pop()
-                num_2 = stack.pop()
                 stack.append(num_1 + num_2)
             if num == "-":
-                num_1 = stack.pop()
-                num_2 = stack.pop()
                 stack.append(num_2 - num_1)
             if num == "*":
-                num_1 = stack.pop()
-                num_2 = stack.pop()
                 stack.append(num_1 * num_2)
             if num == "/":
-                num_1 = stack.pop()
-                num_2 = stack.pop()
                 stack.append(int(num_2 / num_1))
         else:
             stack.append(int(num))
