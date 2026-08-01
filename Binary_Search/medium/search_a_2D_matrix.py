@@ -21,6 +21,9 @@ def search_matrix(matrix: list[list[int]], target: int) -> bool:
                     l = inner_mid + 1
                 else:
                     r = inner_mid - 1
+
+            return False
+        
         elif target > matrix[outter_mid][-1]:
             out_l = outter_mid + 1
         else:
