@@ -20,7 +20,8 @@ class Solution:
         curr = head
         while curr:
             copy = copies[curr]
-            copy.next = copies[curr.next.val]
+            copy.next = copies[curr.next]
             copy.random = copies[curr.random]
+            curr = curr.next
 
-        return head
+        return copies[head]
